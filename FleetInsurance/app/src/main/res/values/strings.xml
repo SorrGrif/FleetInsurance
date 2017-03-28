@@ -14,4 +14,6 @@
     <string name="claimHeader">Accidents can be un-bear-able. Get it fixed up by simply submitting a picture!</string>
     <string name="Date">Date</string>
     <string name="Time">Time</string>
+    <string name="SelectDateHint">Tap to Select Date</string>
+    <string name="SelectTimeHint">Tap to Select Time</string>
 </resources>
