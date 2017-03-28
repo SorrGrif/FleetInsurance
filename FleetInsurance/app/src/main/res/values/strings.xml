@@ -11,4 +11,5 @@
     <string name="current_claim">My Current Claims</string>
     <string name="contact">Contact Us</string>
     <string name="change_plan">Change Current Plan</string>
+    <string name="claimHeader">Accidents can be un-bear-able. Get it fixed up by simply submitting a picture!</string>
 </resources>
