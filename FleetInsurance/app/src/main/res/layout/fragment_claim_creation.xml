@@ -21,18 +21,16 @@
         android:layout_weight="1">
 
         <TextView
-            android:text="TextView"
+            android:text="@string/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/DateLabel"
             android:layout_weight="1" />
 
-        <EditText
+        <DatePicker
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="date"
-            android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/datePicker"
             android:layout_weight="1" />
 
     </LinearLayout>
@@ -44,19 +42,18 @@
         android:layout_weight="1">
 
         <TextView
-            android:text="TextView"
+            android:text="@string/Time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/TimeLabel"
             android:layout_weight="1" />
 
-        <EditText
-            android:layout_width="match_parent"
+        <TimePicker
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="time"
-            android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/timePicker"
             android:layout_weight="1" />
+
     </LinearLayout>
 
 </LinearLayout>
