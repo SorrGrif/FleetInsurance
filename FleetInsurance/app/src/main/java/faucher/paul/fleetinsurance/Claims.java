@@ -3,15 +3,17 @@ package faucher.paul.fleetinsurance;
 public class Claims {
 
     private int id;
+    private String claimName;
     private String date;
     private String desc;
     private String res;
 
 
 
-    Claims(int id, String date, String desc, String res){
+    Claims(int id, String claimName, String date, String desc, String res){
 
         this.id = id;
+        this.claimName = claimName;
         this.date = date;
         this.desc = desc;
         this.res = res;
@@ -26,6 +28,13 @@ public class Claims {
         this.id = id;
     }
 
+    public String getClaimName(){
+        return claimName;
+    }
+
+    public void setClaimName(String claimName) {
+        this.claimName = claimName;
+    }
     public String getDate() {
         return date;
     }

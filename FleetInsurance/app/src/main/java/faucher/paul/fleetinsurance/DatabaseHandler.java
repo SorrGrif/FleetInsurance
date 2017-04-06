@@ -1,5 +1,6 @@
 package faucher.paul.fleetinsurance;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -58,5 +59,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLAIMS);
         onCreate(db);
+    }
+
+    /**
+     * CREATE OPERATIONS
+     */
+
+    public void addUser(Users user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, user.getName());
+        values.put(KEY_ADDRESS, user.getAddress());
+        values.put(KEY_PHONE_NUM, user.getPhoneNum());
+        values.put(KEY_CLAIM_STATUS, user.getClaimStatus());
+        values.put(KEY_PLAN_STATUS, user.getPlanStatus());
+        values.put(KEY_PROFILE_PIC, user.getRes());
+        db.insert(TABLE_USER, null, values);
+    }
+
+    public void addClaim(Claims claim){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_CLAIM_NAME, claim.getClaimName());
+        values.put(KEY_DATE, claim.getDate());
+        values.put(KEY_DESC, claim.getDesc());
+        values.put(KEY_PIC, claim.getRes());
+        db.insert(TABLE_CLAIMS, null, values);
     }
 }
