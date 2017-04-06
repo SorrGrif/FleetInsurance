@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="faucher.paul.fleetinsurance.ClaimCreator"
-    android:background="@color/backgroundColor"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
 
     <TextView
@@ -13,60 +14,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/CreateClaimHeader"
-        android:layout_weight="1" />
+        android:textSize="@dimen/TitleTextSize" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:color/black"
-        android:id="@+id/imageView2"
-        android:layout_weight="1" />
+        android:id="@+id/ClaimImage"
+        app:srcCompat="@drawable/ic_add_a_photo_black_24dp" />
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:text="@string/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/DateLabel"
+            android:textSize="@dimen/TitleTextSize"
             android:layout_weight="1" />
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
             android:id="@+id/DateValue"
-            android:layout_weight="1"
-            android:hint="@string/SelectDateHint" />
+            android:hint="@string/SelectDateHint"
+            android:textSize="@dimen/TextSize" />
 
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:text="@string/Time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/TimeLabel"
+            android:textSize="@dimen/TitleTextSize"
             android:layout_weight="1" />
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
             android:id="@+id/TimeValue"
-            android:layout_weight="1"
-            android:hint="@string/SelectTimeHint" />
+            android:hint="@string/SelectTimeHint"
+            android:textSize="@dimen/TextSize" />
 
     </LinearLayout>
 
