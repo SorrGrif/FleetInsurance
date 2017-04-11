@@ -1,6 +1,7 @@
 package faucher.paul.fleetinsurance;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.util.Calendar;
 
@@ -97,6 +99,28 @@ public class ClaimCreator extends Fragment {
 
                 datePicker.setTitle("Select date");
                 datePicker.show();
+            }
+        });
+
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Calendar currentTime = Calendar.getInstance();
+
+                TimePickerDialog timePicker = new TimePickerDialog(
+                        getActivity(),
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                                
+                            }
+                        },
+                        currentTime.get(Calendar.HOUR),
+                        currentTime.get(Calendar.MINUTE),
+                        false
+                );
+
             }
         });
 
