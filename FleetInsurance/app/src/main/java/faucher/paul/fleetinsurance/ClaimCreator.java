@@ -112,15 +112,30 @@ public class ClaimCreator extends Fragment {
                         getActivity(),
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
-                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                
+                            public void onTimeSet(TimePicker timePicker, int hour, int minute)
+                            {
+                                String hourState = "AM";
+                                if(hour >= 12)
+                                {
+                                    hourState = "PM";
+                                }
+
+                                if(hour > 12 || hour == 0)
+                                {
+
+                                    hour = Math.abs(hour - 12);
+                                }
+
+
+                                time.setText(hour + ":" + minute + " " + hourState);
                             }
                         },
-                        currentTime.get(Calendar.HOUR),
+                        currentTime.get(Calendar.HOUR_OF_DAY),
                         currentTime.get(Calendar.MINUTE),
                         false
                 );
-
+                timePicker.setTitle("Select Time");
+                timePicker.show();
             }
         });
 
