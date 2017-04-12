@@ -16,4 +16,9 @@
     <string name="Time">Time</string>
     <string name="SelectDateHint">Tap to Select Date</string>
     <string name="SelectTimeHint">Tap to Select Time</string>
+    <string name="FirstName">First</string>
+    <string name="LastName">Last</string>
+    <string name="PlaceHolder">\???</string>
+    <string name="Description">Description</string>
+    <string name="CharacterCount">255/255</string>
 </resources>

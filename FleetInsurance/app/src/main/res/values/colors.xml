@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorAccent">#03A9F4</color>
     <color name="backgroundColor">#ddd</color>
+    <color name="titleFontColor">#05a</color>
+    <color name="placeholderFontColor">#c8525252</color>
+    <color name="fontColor">#de000000</color>
 </resources>
