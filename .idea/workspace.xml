@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9e08567-ae30-4a14-8661-36fb4fe77069" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/FleetInsurance/.idea/encodings.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FleetInsurance/.idea/gradle.xml" afterPath="$PROJECT_DIR$/FleetInsurance/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FleetInsurance/.idea/misc.xml" afterPath="$PROJECT_DIR$/FleetInsurance/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FleetInsurance/.idea/modules.xml" afterPath="$PROJECT_DIR$/FleetInsurance/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FleetInsurance/app/src/main/java/faucher/paul/fleetinsurance/DatabaseHandler.java" afterPath="$PROJECT_DIR$/FleetInsurance/app/src/main/java/faucher/paul/fleetinsurance/DatabaseHandler.java" />
     </list>
     <ignored path="FleetInsurance.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,13 +61,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane />
       </pane>
-      <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">

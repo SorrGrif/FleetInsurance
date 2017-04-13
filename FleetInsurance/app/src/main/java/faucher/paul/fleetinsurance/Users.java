@@ -10,9 +10,10 @@ public class Users {
     private String planStatus;
     private String res;
 
-    public Users(String name, String address, String phoneNum,
+    public Users(int id, String name, String address, String phoneNum,
                  String claimStatus, String planStatus, String res) {
 
+        this.id = id;
         this.name = name;
         this.address = address;
         this.phoneNum = phoneNum;

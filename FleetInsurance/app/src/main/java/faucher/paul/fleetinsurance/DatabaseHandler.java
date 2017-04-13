@@ -2,6 +2,7 @@ package faucher.paul.fleetinsurance;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -66,24 +67,83 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
 
     public void addUser(Users user){
+        //Creating a writable database
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues values = new ContentValues();
+
+        //Adding values to each column
         values.put(KEY_NAME, user.getName());
         values.put(KEY_ADDRESS, user.getAddress());
         values.put(KEY_PHONE_NUM, user.getPhoneNum());
         values.put(KEY_CLAIM_STATUS, user.getClaimStatus());
         values.put(KEY_PLAN_STATUS, user.getPlanStatus());
         values.put(KEY_PROFILE_PIC, user.getRes());
+
+        //Inserting records into database
         db.insert(TABLE_USER, null, values);
     }
 
     public void addClaim(Claims claim){
+        //Creating a writable database
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues values = new ContentValues();
+
+        //Adding values to each column
         values.put(KEY_CLAIM_NAME, claim.getClaimName());
         values.put(KEY_DATE, claim.getDate());
         values.put(KEY_DESC, claim.getDesc());
         values.put(KEY_PIC, claim.getRes());
+
+        //Inserting records into database
         db.insert(TABLE_CLAIMS, null, values);
     }
+
+    /**
+     * READ OPERATIONS
+     */
+
+    public Users getUser(int id){
+
+        //Creating a readable database
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //Creating a cursor that will store all queryed data, and be able to sort it
+        Cursor cursor = db.query(TABLE_USER,
+                new String[] {KEY_ID, KEY_NAME, KEY_ADDRESS, KEY_PHONE_NUM,
+                        KEY_CLAIM_STATUS, KEY_PLAN_STATUS, KEY_PROFILE_PIC},
+                "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+
+        if(cursor != null)
+            cursor.moveToFirst();
+
+        Users user = new Users(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                cursor.getString(4), cursor.getString(5), cursor.getString(6));
+        return user;
+    }
+
+    public Claims getClaim(int id){
+
+        //Creating a readable database
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //Creating a cursor that will store all queryed data, and be able to sort it
+        Cursor cursor = db.query(TABLE_CLAIMS,
+                new String[] {KEY_ID, KEY_CLAIM_NAME, KEY_DATE, KEY_DESC,
+                        KEY_PIC},
+                "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+
+        if(cursor != null)
+            cursor.moveToFirst();
+
+       Claims claim = new Claims(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                cursor.getString(4));
+
+        return claim;
+    }
+
+
 }
