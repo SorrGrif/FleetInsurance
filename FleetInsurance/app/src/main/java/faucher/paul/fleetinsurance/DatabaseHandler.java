@@ -181,7 +181,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * DELETE OPERATIONS
      */
 
+    public void deleteUser(long user_id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_USER, KEY_ID + " = ?",
+                new String[]{String.valueOf(user_id)});
+    }
 
+    public void deleteClaim(long claim_id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_CLAIMS, KEY_ID + " = ?",
+                new String[]{String.valueOf(claim_id)});
+    }
+
+    /**
+     * Close the database connection
+     */
+    public void closeDB(){
+        SQLiteDatabase db =this.getReadableDatabase();
+        if(db != null && db.isOpen()){
+            db.close();
+        }
+    }
 
 
 }
