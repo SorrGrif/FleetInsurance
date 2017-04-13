@@ -146,4 +146,42 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * UPDATE OPERATIONS
+     */
+
+    public int updateUser(Users user){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, user.getName());
+        values.put(KEY_ADDRESS, user.getAddress());
+        values.put(KEY_PHONE_NUM, user.getPhoneNum());
+        values.put(KEY_CLAIM_STATUS, user.getClaimStatus());
+        values.put(KEY_PLAN_STATUS, user.getPlanStatus());
+        values.put(KEY_PROFILE_PIC, user.getRes());
+
+        return db.update(TABLE_USER, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(user.getId())});
+    }
+
+    public int updateClaim(Claims claim){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, claim.getClaimName());
+        values.put(KEY_DATE, claim.getDate());
+        values.put(KEY_DESC, claim.getDesc());
+        values.put(KEY_PIC, claim.getRes());
+
+
+        return db.update(TABLE_CLAIMS, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(claim.getId())});
+    }
+
+    /**
+     * DELETE OPERATIONS
+     */
+
+
+
+
 }
