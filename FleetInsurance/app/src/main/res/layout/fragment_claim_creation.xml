@@ -163,7 +163,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ClaimImage"
+        android:id="@+id/CameraButton"
         app:srcCompat="@drawable/ic_add_a_photo_black_24dp"
         android:layout_weight="0.17" />
 
