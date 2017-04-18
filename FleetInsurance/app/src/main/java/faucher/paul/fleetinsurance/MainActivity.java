@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_main, new ClaimCreator());
+        ft.replace(R.id.content_main, new ProfileFragment());
         ft.commit();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
