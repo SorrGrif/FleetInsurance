@@ -6,6 +6,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -29,6 +32,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -57,6 +62,7 @@ public class ClaimCreator extends Fragment {
     private ImageView dateButton;
     private ImageView timeButton;
     private ImageView cameraButton;
+    private LinearLayout imageLayout;
 
 
     private OnFragmentInteractionListener mListener;
@@ -109,6 +115,7 @@ public class ClaimCreator extends Fragment {
         dateButton = (ImageView) view.findViewById(R.id.CalendarButton);
         timeButton = (ImageView) view.findViewById(R.id.ClockButton);
         cameraButton = (ImageView) view.findViewById(R.id.CameraButton);
+        imageLayout = (LinearLayout) view.findViewById(R.id.ImageLayout);
         //this calendar is used to get the current time and day
         final Calendar calendar = Calendar.getInstance();
 
@@ -298,6 +305,34 @@ public class ClaimCreator extends Fragment {
         imageLocation = picture.getAbsolutePath();
 
         return picture;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Bitmap image = BitmapFactory.decodeFile(imageLocation);
+            ImageView imageView = new ImageView(getContext());
+            imageView.setImageBitmap(image);
+            imageView.setPadding(0,0,15,0);
+            imageLayout.addView(imageView);
+            /**
+             * Add the photo to the database
+             */
+//            DatabaseHandler db = new DatabaseHandler(getContext());
+//            int picID = db.addPicture(new Picture(imageLocation));
+//            if(picID != -1){
+//                Location location = (Location) spin.getSelectedItem();
+//                db.addImageLocation(picID, location.getId());
+//                Toast.makeText(getActivity(), "Photo Added",
+//                        Toast.LENGTH_LONG).show();
+//            }
+//            else{
+//                Toast.makeText(getActivity(), "Photo Not Added",
+//                        Toast.LENGTH_LONG).show();
+//            }
+//            db.closeDB();
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
