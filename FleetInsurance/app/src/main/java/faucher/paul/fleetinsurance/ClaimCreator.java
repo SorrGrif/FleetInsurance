@@ -1,11 +1,18 @@
 package faucher.paul.fleetinsurance;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.TextViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +24,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -37,14 +48,15 @@ public class ClaimCreator extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    EditText date;
-    EditText time;
-    EditText firstName;
-    EditText lastName;
-    EditText description;
-    ImageView dateButton;
-    ImageView timeButton;
-    ImageView cameraButton;
+    private String imageLocation;
+    private EditText date;
+    private EditText time;
+    private EditText firstName;
+    private EditText lastName;
+    private EditText description;
+    private ImageView dateButton;
+    private ImageView timeButton;
+    private ImageView cameraButton;
 
 
     private OnFragmentInteractionListener mListener;
@@ -83,6 +95,8 @@ public class ClaimCreator extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_claim_creation, container, false);
 
@@ -97,6 +111,7 @@ public class ClaimCreator extends Fragment {
         cameraButton = (ImageView) view.findViewById(R.id.CameraButton);
         //this calendar is used to get the current time and day
         final Calendar calendar = Calendar.getInstance();
+
 
         //when the layout first loads set the text of the date field to the current date
         date.setText(calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR));
@@ -164,6 +179,69 @@ public class ClaimCreator extends Fragment {
         });
 
 
+
+        cameraButton.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                boolean hasPermission = true;
+                //these if statements are required to ask for required permsision to read write and use the camera
+                //this one is for the write external storage permission
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                {
+                    hasPermission = false;
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+                }
+
+                //this one is for the read external storage permission
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                {
+                    hasPermission = false;
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+                }
+
+                //this one is for the camera permission
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                {
+                    hasPermission = false;
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 0);
+                }
+
+                if(hasPermission)
+                {
+                    //create a new file object named picture which will hold the picture that is taken
+                    File picture = null;
+
+                    try
+                    {
+                        //init picture object with the create image method
+                        picture = createImage();
+                    } catch (IOException e)
+                    {
+                        //if theres an error print it to the console
+                        e.printStackTrace();
+                    }
+
+                    //create a new intent which will be used to store the image
+                    Intent intent = new Intent();
+                    intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(picture));
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null)
+                    {
+                        startActivityForResult(intent, 1);
+                    }
+                }
+
+            }
+        });
+
+        //this will be replaced later with the account object
+        firstName.setText("Griffin");
+        lastName.setText("Sorrentino");
+
+
         return view;
     }
 
@@ -198,6 +276,28 @@ public class ClaimCreator extends Fragment {
 
         //return the converted time in hour:minute AM||PM format
         return hour + ":" + minute + " " + hourState;
+    }
+
+    /**
+     * This method is used to capture and create a new image
+     * @return picture
+     * @throws IOException
+     */
+    File createImage() throws IOException{
+        //Create a timestamp to help create a collision free name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHss").format(new Date());
+        //Create the name of the image
+        String fileName = "claim_" + timeStamp;
+
+        //Grab the directory we want to save the image
+        File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        //Create the image in that directory
+        File picture = File.createTempFile(fileName, ".jpg", directory);
+
+        //Save the location of the image
+        imageLocation = picture.getAbsolutePath();
+
+        return picture;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

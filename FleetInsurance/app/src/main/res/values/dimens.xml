@@ -8,4 +8,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="TitleTextSize">15sp</dimen>
     <dimen name="TextSize">20sp</dimen>
+    <dimen name="EditTextWidth">100dp</dimen>
+    <dimen name="EditTextHeight">50dp</dimen>
+    <dimen name="ButtonImageHeight">50dp</dimen>
 </resources>
