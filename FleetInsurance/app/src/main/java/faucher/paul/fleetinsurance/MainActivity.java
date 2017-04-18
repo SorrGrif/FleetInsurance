@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
         fab.setImageResource(R.drawable.ic_add_black_24dp);
+        //fab = null;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

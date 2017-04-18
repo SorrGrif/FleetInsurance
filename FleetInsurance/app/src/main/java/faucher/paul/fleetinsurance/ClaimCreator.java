@@ -12,10 +12,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.TextViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,6 +62,7 @@ public class ClaimCreator extends Fragment {
     private ImageView timeButton;
     private ImageView cameraButton;
     private LinearLayout imageLayout;
+    private FloatingActionButton fab;
 
 
     private OnFragmentInteractionListener mListener;
@@ -100,9 +100,8 @@ public class ClaimCreator extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_claim_creation, container, false);
 
@@ -116,9 +115,10 @@ public class ClaimCreator extends Fragment {
         timeButton = (ImageView) view.findViewById(R.id.ClockButton);
         cameraButton = (ImageView) view.findViewById(R.id.CameraButton);
         imageLayout = (LinearLayout) view.findViewById(R.id.ImageLayout);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+
         //this calendar is used to get the current time and day
         final Calendar calendar = Calendar.getInstance();
-
 
         //when the layout first loads set the text of the date field to the current date
         date.setText(calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR));
@@ -185,8 +185,8 @@ public class ClaimCreator extends Fragment {
             }
         });
 
-
-
+        //when the camera button is pressed it will launch the camera where to user
+        //can take a picture of the damage to his or her car and upload it to the claim
         cameraButton.setOnClickListener(new View.OnClickListener()
         {
 
@@ -241,6 +241,16 @@ public class ClaimCreator extends Fragment {
                     }
                 }
 
+            }
+        });
+
+        fab.setImageResource(R.drawable.ic_done_white_24dp);
+        //the fab will be used to add the claim to the database
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "**REPLACE** Claim Added **REPLACE**", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
 
@@ -310,6 +320,8 @@ public class ClaimCreator extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //if the activity result is the camera create a new image view add the image to it
+        //and add the imageview to the imagelayout which will display on the bottom of the fragment
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bitmap image = BitmapFactory.decodeFile(imageLocation);
             ImageView imageView = new ImageView(getContext());
