@@ -18,7 +18,10 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        ClaimCreator.OnFragmentInteractionListener{
+        ClaimCreator.OnFragmentInteractionListener,
+        ProfileFragment.OnFragmentInteractionListener,
+        LoggedInFragment.OnFragmentInteractionListener,
+        LoggedOutFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_main, new ProfileFragment());
+        ft.replace(R.id.content_main, new LoggedOutFragment());
         ft.commit();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);

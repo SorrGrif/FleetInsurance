@@ -9,16 +9,106 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:id="@+id/EmailLabel"
+        android:id="@+id/SignInLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/EmailText" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:text="@string/SignIn"
+        android:textColor="@color/titleFontColor"
+        android:textSize="@dimen/TitleTextSize"
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/EmailValue"
+    <ImageView
+        android:id="@+id/AccountImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/TopMargin"
+        app:srcCompat="@drawable/accountsillhoutte" />
+
+    <LinearLayout
+        android:id="@+id/EmailLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/EmailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/EmailText"
+            android:textColor="@color/titleFontColor"
+            android:textSize="@dimen/TitleTextSize"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/EmailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/TextSize" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/PasswordLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/PasswordLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/TopMargin"
+            android:text="@string/Password"
+            android:textColor="@color/titleFontColor"
+            android:textSize="@dimen/TitleTextSize"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/PasswordValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/TextSize" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/RetypePasswordLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/RetypePasswordLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/TopMargin"
+            android:text="@string/RetypePassword"
+            android:textColor="@color/titleFontColor"
+            android:textSize="@dimen/TitleTextSize"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/RetypePasswordValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/TextSize" />
+    </LinearLayout>
 
 </LinearLayout>
