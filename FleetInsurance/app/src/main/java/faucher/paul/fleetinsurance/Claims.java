@@ -1,16 +1,26 @@
 package faucher.paul.fleetinsurance;
 
+import java.io.File;
+
 public class Claims {
 
     private int id;
     private String claimName;
     private String date;
     private String desc;
-    private String res;
+    private File res;
 
 
+    Claims(String claimName, String date, String desc, File res){
 
-    Claims(int id, String claimName, String date, String desc, String res){
+        this.claimName = claimName;
+        this.date = date;
+        this.desc = desc;
+        this.res = res;
+
+    }
+
+    Claims(int id, String claimName, String date, String desc, File res){
 
         this.id = id;
         this.claimName = claimName;
@@ -51,11 +61,11 @@ public class Claims {
         this.desc = desc;
     }
 
-    public String getRes() {
+    public File getRes() {
         return res;
     }
 
-    public void setRes(String res) {
+    public void setRes(File res) {
         this.res = res;
     }
 

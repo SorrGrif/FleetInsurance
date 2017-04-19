@@ -52,6 +52,7 @@ public class ClaimCreator extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String stringDate;
     private String imageLocation;
     private EditText date;
     private EditText time;
@@ -63,6 +64,7 @@ public class ClaimCreator extends Fragment {
     private ImageView cameraButton;
     private LinearLayout imageLayout;
     private FloatingActionButton fab;
+    private File picture = null;
 
 
     private OnFragmentInteractionListener mListener;
@@ -117,6 +119,7 @@ public class ClaimCreator extends Fragment {
         imageLayout = (LinearLayout) view.findViewById(R.id.ImageLayout);
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
+
         //this calendar is used to get the current time and day
         final Calendar calendar = Calendar.getInstance();
 
@@ -137,7 +140,9 @@ public class ClaimCreator extends Fragment {
                             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday)
                             {
                                 //when the date is set the date edittext field will be set to the chosen date
-                                date.setText(selectedday + "/" + selectedmonth + "/" + selectedyear);
+
+                                stringDate = selectedday + "/" + selectedmonth + "/" + selectedyear;
+                                date.setText(stringDate);
                             }
                         },
                         //these fields are used to set the default date shown when the dialog pops up
@@ -218,9 +223,6 @@ public class ClaimCreator extends Fragment {
 
                 if(hasPermission)
                 {
-                    //create a new file object named picture which will hold the picture that is taken
-                    File picture = null;
-
                     try
                     {
                         //init picture object with the create image method
@@ -249,8 +251,10 @@ public class ClaimCreator extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "**REPLACE** Claim Added **REPLACE**", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                DatabaseHandler db = new DatabaseHandler(getContext());
+                db.addClaim(new Claims("Accident",stringDate, description.getText().toString(), picture));
+                picture = null;
+                getFragmentManager().popBackStack();
             }
         });
 
