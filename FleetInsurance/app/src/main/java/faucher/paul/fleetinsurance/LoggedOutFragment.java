@@ -1,17 +1,20 @@
 package faucher.paul.fleetinsurance;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 
 /**
@@ -31,7 +34,15 @@ public class LoggedOutFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ImageView accountImage;
+    private EditText email;
+    private EditText password;
+    private EditText retypePassword;
+    private FloatingActionButton fab;
+    private LinearLayout passwordLayout;
+    private LinearLayout retypePasswordLayout;
+    private boolean newAccount = true;
+    private boolean emailIsValid = false;
+    private boolean passwordsMatch = false;
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,9 +83,170 @@ public class LoggedOutFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_logged_out, container, false);
 
+        //initialize all the items in the layout
+        email = (EditText) view.findViewById(R.id.EmailValue);
+        password = (EditText) view.findViewById(R.id.PasswordValue);
+        retypePassword = (EditText) view.findViewById(R.id.RetypePasswordValue);
+        passwordLayout = (LinearLayout) view.findViewById(R.id.PasswordLayout);
+        retypePasswordLayout = (LinearLayout) view.findViewById(R.id.RetypePasswordLayout);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+
+        //animations used to have the password and retype password fields fly onscreen smoothly
+        final Animation passwordSlideInFromRight = AnimationUtils.loadAnimation(getContext(), R.anim.slideinfromright);
+        final Animation retypePasswordSlideInFromRight = AnimationUtils.loadAnimation(getContext(), R.anim.slideinfromright);
+        passwordSlideInFromRight.setDuration(500);
+        retypePasswordSlideInFromRight.setDuration(500);
+
+        //when the text is changed in the email field the color will change according
+        //to if the email address is valid or not
+        email.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+                validateEmails();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+
+            }
+        });
+
+        password.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+                validatePasswords();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+
+            }
+        });
+        retypePassword.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+                validatePasswords();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+
+            }
+        });
+
+        //set the image of the FAB button to the next button
+        fab.setImageResource(R.drawable.ic_navigate_next_white_24dp);
+        //many different things will happen when the FAB button is clicked
+        //first if the email field is shown and the email is a valid account email
+        //it will show the password field, however if the email is a new user it will show
+        //both the password AND retype password field
+        //once the field is shown the button will skip to the next field to be entered or it will
+        //turn into a send button and submit your login information
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                    if (passwordLayout.getVisibility() != View.VISIBLE && emailIsValid)
+                    {
+                        passwordLayout.setVisibility(View.VISIBLE);
+                        passwordLayout.setAnimation(passwordSlideInFromRight);
+                        passwordLayout.animate();
+                        passwordSlideInFromRight.start();
+
+                        if (newAccount)
+                        {
+                            retypePasswordLayout.setVisibility(View.VISIBLE);
+                            retypePasswordLayout.setAnimation(retypePasswordSlideInFromRight);
+                            retypePasswordLayout.animate();
+                            retypePasswordSlideInFromRight.setStartOffset(passwordSlideInFromRight.getDuration());
+                            retypePasswordSlideInFromRight.start();
+                        }
+                    }
+
+                    if(newAccount && passwordsMatch)
+                    {
+
+                    }
+            }
+        });
 
 
         return view;
+    }
+
+    /**
+     * This method is used to check if the current email
+     * address entered into the field is valid or not
+     * @return valid email address
+     */
+    private void validateEmails()
+    {
+        //put the current string of the email field into a string named email
+        String email = this.email.getText().toString();
+
+        //check if the email stirng contains @ and .
+        //if it does set email is valid to true and textcolor to green
+        //otherwise set it to red and set emailisvalid to false
+        if(email.contains("@") && email.contains("."))
+        {
+            //I used RGB instead of Color.GREEN because the default green
+            //literally hurt my eyes when i first saw it
+            this.email.setTextColor(Color.rgb(0,230,0));
+            emailIsValid = true;
+        }
+        else
+        {
+            this.email.setTextColor(Color.RED);
+            emailIsValid = false;
+        }
+    }
+
+    private void validatePasswords()
+    {
+        String password = this.password.getText().toString();
+        String retypePassword = this.retypePassword.getText().toString();
+
+        if(password.equals(retypePassword))
+        {
+            //I used RGB instead of Color.GREEN because the default green
+            //literally hurt my eyes when i first saw it
+            this.password.setTextColor(Color.rgb(0,230,0));
+            this.retypePassword.setTextColor(Color.rgb(0,230,0));
+            emailIsValid = true;
+        }
+        else
+        {
+            this.password.setTextColor(Color.RED);
+            this.retypePassword.setTextColor(Color.RED);
+            emailIsValid = false;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
