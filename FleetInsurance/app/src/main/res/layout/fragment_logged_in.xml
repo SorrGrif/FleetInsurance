@@ -28,86 +28,58 @@
         app:srcCompat="@drawable/accountsillhoutte" />
 
     <LinearLayout
+        android:id="@+id/MyPlanLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/LeftPadding"
+        android:paddingRight="@dimen/RightPadding">
 
         <TextView
-            android:id="@+id/textView25"
+            android:id="@+id/MyPlanLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="title"
-            android:textSize="25sp" />
+            android:text="@string/MyPlan"
+            android:textColor="@color/titleFontColor"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView27"
+            android:id="@+id/MyPlanDescriptionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="description" />
+            android:text="@string/MyPlanDescription"
+            android:textColor="@color/colorPrimaryDark" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/MyClaimsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/LeftPadding"
+        android:paddingRight="@dimen/RightPadding">
 
         <TextView
-            android:id="@+id/textView25"
+            android:id="@+id/MyClaimsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="title"
-            android:textSize="25sp" />
+            android:text="@string/MyClaims"
+            android:textColor="@color/titleFontColor"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView27"
+            android:id="@+id/MyClaimsDescriptionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="description" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="title"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/textView27"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="description" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="title"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/textView27"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="description" />
+            android:text="@string/MyClaimsDescription"
+            android:textColor="@color/colorPrimaryDark" />
 
     </LinearLayout>
 

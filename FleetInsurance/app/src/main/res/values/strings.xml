@@ -29,6 +29,10 @@
     <string name="Gender">Gender</string>
     <string name="Age">Age</string>
     <string name="WelcomePlaceholder">Welcome, ???</string>
+    <string name="MyPlan">My Plan</string>
+    <string name="MyPlanDescription">View your current plan</string>
+    <string name="MyClaims">My Claims</string>
+    <string name="MyClaimsDescription">View my claims</string>
     <array name="Genders">
         <item>Male</item>
         <item>Female</item>
