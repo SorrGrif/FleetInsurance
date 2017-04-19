@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="eee3e74b-b390-44c2-bd81-052cae5da218" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/FleetInsurance/README copy.md" afterPath="" />
+    <list default="true" id="f9e08567-ae30-4a14-8661-36fb4fe77069" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FleetInsurance/app/src/main/java/faucher/paul/fleetinsurance/DatabaseHandler.java" afterPath="$PROJECT_DIR$/FleetInsurance/app/src/main/java/faucher/paul/fleetinsurance/DatabaseHandler.java" />
     </list>
     <ignored path="FleetInsurance.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,6 +36,10 @@
     <option name="y" value="22" />
     <option name="width" value="1280" />
     <option name="height" value="711" />
+    <option name="x" value="313" />
+    <option name="y" value="56" />
+    <option name="width" value="967" />
+    <option name="height" value="669" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -59,6 +66,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane />
       </pane>
@@ -74,6 +83,8 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
@@ -172,11 +183,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1490721827768</updated>
+      <changelist id="f9e08567-ae30-4a14-8661-36fb4fe77069" name="Default" comment="" />
+      <created>1491431726344</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1491431726344</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="711" extended-state="6" />
+    <frame x="313" y="56" width="967" height="669" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -192,6 +209,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17124736" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
