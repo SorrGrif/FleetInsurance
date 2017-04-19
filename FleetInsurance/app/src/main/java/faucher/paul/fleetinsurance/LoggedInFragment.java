@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 
 /**
@@ -26,6 +27,8 @@ public class LoggedInFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private LinearLayout claimLayout;
+    private LinearLayout planLayout;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +67,14 @@ public class LoggedInFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_logged_in, container, false);
+        View view = inflater.inflate(R.layout.fragment_logged_in, container, false);
+
+        planLayout = (LinearLayout) view.findViewById(R.id.MyPlanLayout);
+        claimLayout = (LinearLayout) view.findViewById(R.id.MyClaimsLayout);
+
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

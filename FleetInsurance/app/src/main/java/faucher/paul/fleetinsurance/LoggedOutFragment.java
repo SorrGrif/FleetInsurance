@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -45,6 +47,8 @@ public class LoggedOutFragment extends Fragment {
     private boolean newAccount = true;
     private boolean emailIsValid = false;
     private boolean passwordsMatch = false;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
 
     private OnFragmentInteractionListener mListener;
 
@@ -94,6 +98,8 @@ public class LoggedOutFragment extends Fragment {
         nameLayout = (LinearLayout) view.findViewById(R.id.FirstNameLastNameLayout);
         genderAgeLayout = (LinearLayout) view.findViewById(R.id.GenderAgeLayout);
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        fm = getChildFragmentManager();
+        ft = fm.beginTransaction();
 
         //animations used to have the password and retype password fields fly onscreen smoothly
         final Animation passwordSlideInFromRight = AnimationUtils.loadAnimation(getContext(), R.anim.slideinfromright);
@@ -213,8 +219,8 @@ public class LoggedOutFragment extends Fragment {
                     //if the user is making a new account
                     if(newAccount && fieldsFull())
                     {
-                        //savedinstancestate logged in?
-                        //popbackstack back to the profile frag
+                        ft.replace(R.id.content_main, new LoggedInFragment());
+                        ft.commit();
                     }
                     else
                     {
