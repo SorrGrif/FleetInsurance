@@ -21,4 +21,5 @@
     <string name="PlaceHolder">\???</string>
     <string name="Description">Description</string>
     <string name="CharacterCount">255/255</string>
+    <string name="ClaimName">Claim Name Here</string>
 </resources>

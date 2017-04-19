@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.location.Location;
+
+import java.util.ArrayList;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -143,6 +146,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(4));
 
         return claim;
+    }
+
+    public ArrayList<Claims> getAllClaims() {
+        ArrayList<Claims> claimsList = new ArrayList<Claims>();
+        String selectQuery = "SELECT  * FROM " + TABLE_CLAIMS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Claims claim = new Claims();
+                claim.setId(0);
+                claim.setClaimName(cursor.getString(1));
+                claim.setDate(cursor.getString(2));
+                claim.setDesc(cursor.getString(3));
+                claim.setRes(cursor.getString(4));
+                claimsList.add(claim);
+            } while (cursor.moveToNext());
+        }
+        return claimsList;
     }
 
 

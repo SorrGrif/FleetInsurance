@@ -252,7 +252,15 @@ public class ClaimCreator extends Fragment {
             @Override
             public void onClick(View view) {
                 DatabaseHandler db = new DatabaseHandler(getContext());
-                db.addClaim(new Claims("Accident",stringDate, description.getText().toString(), picture));
+                if(picture == null)
+                {
+                    db.addClaim(new Claims("Accident", stringDate, description.getText().toString(), ""));
+                }
+                else
+                {
+                    db.addClaim(new Claims("Accident", stringDate, description.getText().toString(), picture.getPath()));
+
+                }
                 picture = null;
                 getFragmentManager().popBackStack();
             }
