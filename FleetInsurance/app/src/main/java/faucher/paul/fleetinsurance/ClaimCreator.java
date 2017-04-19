@@ -274,12 +274,6 @@ public class ClaimCreator extends Fragment {
 
             }
         });
-
-        //this will be replaced later with the account object
-        firstName.setText("Griffin");
-        lastName.setText("Sorrentino");
-
-
         return view;
     }
 
