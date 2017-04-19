@@ -28,6 +28,7 @@
     <string name="SignIn">Sign in</string>
     <string name="Gender">Gender</string>
     <string name="Age">Age</string>
+    <string name="WelcomePlaceholder">Welcome, ???</string>
     <array name="Genders">
         <item>Male</item>
         <item>Female</item>

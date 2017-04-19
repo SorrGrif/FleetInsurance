@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_main, new LoggedOutFragment());
+        ft.replace(R.id.content_main, new LoggedInFragment());
         ft.commit();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
