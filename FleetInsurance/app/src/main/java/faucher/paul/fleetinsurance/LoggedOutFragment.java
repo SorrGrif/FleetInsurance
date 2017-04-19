@@ -40,6 +40,8 @@ public class LoggedOutFragment extends Fragment {
     private FloatingActionButton fab;
     private LinearLayout passwordLayout;
     private LinearLayout retypePasswordLayout;
+    private LinearLayout nameLayout;
+    private LinearLayout genderAgeLayout;
     private boolean newAccount = true;
     private boolean emailIsValid = false;
     private boolean passwordsMatch = false;
@@ -89,13 +91,19 @@ public class LoggedOutFragment extends Fragment {
         retypePassword = (EditText) view.findViewById(R.id.RetypePasswordValue);
         passwordLayout = (LinearLayout) view.findViewById(R.id.PasswordLayout);
         retypePasswordLayout = (LinearLayout) view.findViewById(R.id.RetypePasswordLayout);
+        nameLayout = (LinearLayout) view.findViewById(R.id.FirstNameLastNameLayout);
+        genderAgeLayout = (LinearLayout) view.findViewById(R.id.GenderAgeLayout);
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
         //animations used to have the password and retype password fields fly onscreen smoothly
         final Animation passwordSlideInFromRight = AnimationUtils.loadAnimation(getContext(), R.anim.slideinfromright);
         final Animation retypePasswordSlideInFromRight = AnimationUtils.loadAnimation(getContext(), R.anim.slideinfromright);
+        final Animation nameSlideInFromRight = AnimationUtils.loadAnimation(getContext(), R.anim.slideinfromright);
+        final Animation genderAgeSlideInFromRight = AnimationUtils.loadAnimation(getContext(), R.anim.slideinfromright);
         passwordSlideInFromRight.setDuration(500);
         retypePasswordSlideInFromRight.setDuration(500);
+        nameSlideInFromRight.setDuration(500);
+        genderAgeSlideInFromRight.setDuration(500);
 
         //when the text is changed in the email field the color will change according
         //to if the email address is valid or not
@@ -162,7 +170,7 @@ public class LoggedOutFragment extends Fragment {
         });
 
         //set the image of the FAB button to the next button
-        fab.setImageResource(R.drawable.ic_navigate_next_white_24dp);
+        fab.setImageResource(R.drawable.ic_send_white_24dp);
         //many different things will happen when the FAB button is clicked
         //first if the email field is shown and the email is a valid account email
         //it will show the password field, however if the email is a new user it will show
@@ -185,12 +193,30 @@ public class LoggedOutFragment extends Fragment {
                             retypePasswordLayout.setVisibility(View.VISIBLE);
                             retypePasswordLayout.setAnimation(retypePasswordSlideInFromRight);
                             retypePasswordLayout.animate();
-                            retypePasswordSlideInFromRight.setStartOffset(passwordSlideInFromRight.getDuration());
+                            retypePasswordSlideInFromRight.setStartOffset(passwordSlideInFromRight.getDuration() * 1);
                             retypePasswordSlideInFromRight.start();
+
+                            nameLayout.setVisibility(View.VISIBLE);
+                            nameLayout.setAnimation(nameSlideInFromRight);
+                            nameLayout.animate();
+                            nameSlideInFromRight.setStartOffset(passwordSlideInFromRight.getDuration() * 2);
+                            nameSlideInFromRight.start();
+
+                            genderAgeLayout.setVisibility(View.VISIBLE);
+                            genderAgeLayout.setAnimation(genderAgeSlideInFromRight);
+                            genderAgeLayout.animate();
+                            genderAgeSlideInFromRight.setStartOffset(passwordSlideInFromRight.getDuration() * 3);
+                            genderAgeSlideInFromRight.start();
                         }
                     }
 
-                    if(newAccount && passwordsMatch)
+                    //if the user is making a new account
+                    if(newAccount && fieldsFull())
+                    {
+                        //savedinstancestate logged in?
+                        //popbackstack back to the profile frag
+                    }
+                    else
                     {
 
                     }
@@ -239,14 +265,19 @@ public class LoggedOutFragment extends Fragment {
             //literally hurt my eyes when i first saw it
             this.password.setTextColor(Color.rgb(0,230,0));
             this.retypePassword.setTextColor(Color.rgb(0,230,0));
-            emailIsValid = true;
+            passwordsMatch = true;
         }
         else
         {
             this.password.setTextColor(Color.RED);
             this.retypePassword.setTextColor(Color.RED);
-            emailIsValid = false;
+            passwordsMatch = false;
         }
+    }
+
+    private boolean fieldsFull()
+    {
+        return false;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

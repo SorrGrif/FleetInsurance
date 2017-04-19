@@ -12,4 +12,6 @@
     <dimen name="EditTextHeight">50dp</dimen>
     <dimen name="ButtonImageHeight">50dp</dimen>
     <dimen name="TopMargin">10dp</dimen>
+    <dimen name="LeftPadding">10dp</dimen>
+    <dimen name="RightPadding">10dp</dimen>
 </resources>

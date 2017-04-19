@@ -23,33 +23,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/LastNameLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/LastName"
-                android:textColor="@color/titleFontColor"
-                android:textSize="@dimen/TitleTextSize"
-                android:textStyle="normal|bold" />
-
-            <EditText
-                android:id="@+id/LastNameValue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="textPersonName"
-                android:text="@string/PlaceHolder"
-                android:textColor="@color/fontColor"
-                android:textSize="@dimen/TextSize" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
                 android:id="@+id/FirstNameLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,6 +43,34 @@
                 android:textSize="@dimen/TextSize" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/LastNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/LastName"
+                android:textColor="@color/titleFontColor"
+                android:textSize="@dimen/TitleTextSize"
+                android:textStyle="normal|bold" />
+
+            <EditText
+                android:id="@+id/LastNameValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="@string/PlaceHolder"
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/TextSize" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout

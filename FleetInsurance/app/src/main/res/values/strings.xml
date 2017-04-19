@@ -26,4 +26,11 @@
     <string name="Password">Password</string>
     <string name="RetypePassword">Retype Password</string>
     <string name="SignIn">Sign in</string>
+    <string name="Gender">Gender</string>
+    <string name="Age">Age</string>
+    <array name="Genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </array>
 </resources>
