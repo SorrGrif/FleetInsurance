@@ -16,7 +16,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -160,7 +163,7 @@ public class ClaimCreator extends Fragment {
         });
 
         //when the layout first loads set the text of the time field to the current time
-        time.setText(convertTime(calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE)));
+        time.setText(convertTime(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
         //when the user clicks on the clock button a clock will pop up so they may choose a time
         timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,7 +267,11 @@ public class ClaimCreator extends Fragment {
 
                 }
                 picture = null;
-                getFragmentManager().popBackStack();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.content_main, new ClaimViewer());
+                ft.commit();
+
             }
         });
 

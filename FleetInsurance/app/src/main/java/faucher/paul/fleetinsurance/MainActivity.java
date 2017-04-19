@@ -19,7 +19,9 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         ClaimCreator.OnFragmentInteractionListener,
-        ClaimViewer.OnFragmentInteractionListener{
+        ClaimViewer.OnFragmentInteractionListener,
+        PlanChanger.OnFragmentInteractionListener,
+        Contact.OnFragmentInteractionListener{
 
 
 
@@ -57,8 +59,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
+
     }
 
     @Override
@@ -99,11 +100,13 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
 
         if (id == R.id.nav_myPlan)
         {
-            ft.replace(R.id.content_main, new ACCOUNT);
-            ft.commit();
+            //ft.replace(R.id.content_main, new ProfileFragment());
+            //ft.commit();
         }
         else if (id == R.id.nav_createClaim)
         {
