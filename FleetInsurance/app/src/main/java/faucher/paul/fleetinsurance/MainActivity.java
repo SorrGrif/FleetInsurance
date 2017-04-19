@@ -22,7 +22,14 @@ public class MainActivity extends AppCompatActivity
         ProfileFragment.OnFragmentInteractionListener,
         LoggedInFragment.OnFragmentInteractionListener,
         LoggedOutFragment.OnFragmentInteractionListener{
+        ClaimViewer.OnFragmentInteractionListener,
+        PlanChanger.OnFragmentInteractionListener,
+        Contact.OnFragmentInteractionListener{
 
+
+
+    FragmentManager fm;
+    FragmentTransaction ft;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +56,13 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_main, new LoggedInFragment());
+        ft.replace(R.id.content_main, new ClaimViewer());
         ft.commit();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
@@ -94,21 +103,38 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-       /*
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        if (id == R.id.nav_myPlan)
+        {
+            //ft.replace(R.id.content_main, new ProfileFragment());
+            //ft.commit();
+        }
+        else if (id == R.id.nav_createClaim)
+        {
+            ft.replace(R.id.content_main, new ClaimCreator());
+            ft.commit();
+        }
+        else if (id == R.id.nav_currentClaim)
+        {
+            ft.replace(R.id.content_main, new ClaimViewer());
+            ft.commit();
 
         }
-*/
+        else if (id == R.id.nav_planChange)
+        {
+            ft.replace(R.id.content_main, new PlanChanger());
+            ft.commit();
+
+        }
+        else if (id == R.id.nav_contact)
+        {
+            ft.replace(R.id.content_main, new Contact());
+            ft.commit();
+
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

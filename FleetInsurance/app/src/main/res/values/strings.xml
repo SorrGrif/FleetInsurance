@@ -38,4 +38,6 @@
         <item>Female</item>
         <item>Other</item>
     </array>
+    <string name="ClaimName">Claim Name Here</string>
+    <string name="Title">Title</string>
 </resources>

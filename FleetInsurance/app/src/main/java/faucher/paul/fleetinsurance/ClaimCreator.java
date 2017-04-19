@@ -16,7 +16,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,17 +55,20 @@ public class ClaimCreator extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String stringDate;
     private String imageLocation;
     private EditText date;
     private EditText time;
     private EditText firstName;
     private EditText lastName;
+    private EditText title;
     private EditText description;
     private ImageView dateButton;
     private ImageView timeButton;
     private ImageView cameraButton;
     private LinearLayout imageLayout;
     private FloatingActionButton fab;
+    private File picture = null;
 
 
     private OnFragmentInteractionListener mListener;
@@ -111,11 +117,13 @@ public class ClaimCreator extends Fragment {
         firstName = (EditText) view.findViewById(R.id.FirstNameValue);
         lastName = (EditText) view.findViewById(R.id.LastNameValue);
         description = (EditText) view.findViewById(R.id.DescriptionValue);
+        title = (EditText) view.findViewById(R.id.TitleValue);
         dateButton = (ImageView) view.findViewById(R.id.CalendarButton);
         timeButton = (ImageView) view.findViewById(R.id.ClockButton);
         cameraButton = (ImageView) view.findViewById(R.id.CameraButton);
         imageLayout = (LinearLayout) view.findViewById(R.id.ImageLayout);
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+
 
         //this calendar is used to get the current time and day
         final Calendar calendar = Calendar.getInstance();
@@ -137,7 +145,9 @@ public class ClaimCreator extends Fragment {
                             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday)
                             {
                                 //when the date is set the date edittext field will be set to the chosen date
-                                date.setText(selectedday + "/" + selectedmonth + "/" + selectedyear);
+
+                                stringDate = selectedday + "/" + selectedmonth + "/" + selectedyear;
+                                date.setText(stringDate);
                             }
                         },
                         //these fields are used to set the default date shown when the dialog pops up
@@ -153,7 +163,7 @@ public class ClaimCreator extends Fragment {
         });
 
         //when the layout first loads set the text of the time field to the current time
-        time.setText(convertTime(calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE)));
+        time.setText(convertTime(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
         //when the user clicks on the clock button a clock will pop up so they may choose a time
         timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,9 +228,6 @@ public class ClaimCreator extends Fragment {
 
                 if(hasPermission)
                 {
-                    //create a new file object named picture which will hold the picture that is taken
-                    File picture = null;
-
                     try
                     {
                         //init picture object with the create image method
@@ -249,8 +256,22 @@ public class ClaimCreator extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "**REPLACE** Claim Added **REPLACE**", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                DatabaseHandler db = new DatabaseHandler(getContext());
+                if(picture == null)
+                {
+                    db.addClaim(new Claims(title.getText().toString(), stringDate, description.getText().toString(), ""));
+                }
+                else
+                {
+                    db.addClaim(new Claims(title.getText().toString(), stringDate, description.getText().toString(), picture.getPath()));
+
+                }
+                picture = null;
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.content_main, new ClaimViewer());
+                ft.commit();
+
             }
         });
 
