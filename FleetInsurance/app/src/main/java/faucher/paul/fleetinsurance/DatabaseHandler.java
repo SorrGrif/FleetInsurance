@@ -1,18 +1,20 @@
 package faucher.paul.fleetinsurance;
 
+import android.app.IntentService;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Location;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     //Database Name
     private static final String DATABASE_NAME = "fleetInsurance";
@@ -93,7 +95,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
+        ArrayList<Claims> claimList = getAllClaims();
         //Adding values to each column
+        values.put(KEY_ID, claimList.size() + 1);
         values.put(KEY_CLAIM_NAME, claim.getClaimName());
         values.put(KEY_DATE, claim.getDate());
         values.put(KEY_DESC, claim.getDesc());
@@ -101,6 +105,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         //Inserting records into database
         db.insert(TABLE_CLAIMS, null, values);
+        db.close();
     }
 
     /**
@@ -157,7 +162,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Claims claim = new Claims();
-                claim.setId(0);
+                    claim.setId(Integer.parseInt(cursor.getString(0)));
                 claim.setClaimName(cursor.getString(1));
                 claim.setDate(cursor.getString(2));
                 claim.setDesc(cursor.getString(3));

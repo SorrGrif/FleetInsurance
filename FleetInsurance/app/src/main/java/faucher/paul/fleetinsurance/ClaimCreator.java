@@ -58,6 +58,7 @@ public class ClaimCreator extends Fragment {
     private EditText time;
     private EditText firstName;
     private EditText lastName;
+    private EditText title;
     private EditText description;
     private ImageView dateButton;
     private ImageView timeButton;
@@ -113,6 +114,7 @@ public class ClaimCreator extends Fragment {
         firstName = (EditText) view.findViewById(R.id.FirstNameValue);
         lastName = (EditText) view.findViewById(R.id.LastNameValue);
         description = (EditText) view.findViewById(R.id.DescriptionValue);
+        title = (EditText) view.findViewById(R.id.TitleValue);
         dateButton = (ImageView) view.findViewById(R.id.CalendarButton);
         timeButton = (ImageView) view.findViewById(R.id.ClockButton);
         cameraButton = (ImageView) view.findViewById(R.id.CameraButton);
@@ -254,11 +256,11 @@ public class ClaimCreator extends Fragment {
                 DatabaseHandler db = new DatabaseHandler(getContext());
                 if(picture == null)
                 {
-                    db.addClaim(new Claims("Accident", stringDate, description.getText().toString(), ""));
+                    db.addClaim(new Claims(title.getText().toString(), stringDate, description.getText().toString(), ""));
                 }
                 else
                 {
-                    db.addClaim(new Claims("Accident", stringDate, description.getText().toString(), picture.getPath()));
+                    db.addClaim(new Claims(title.getText().toString(), stringDate, description.getText().toString(), picture.getPath()));
 
                 }
                 picture = null;

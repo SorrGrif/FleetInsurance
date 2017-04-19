@@ -8,14 +8,18 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,11 +84,25 @@ public class ClaimViewer extends Fragment {
         View view = inflater.inflate(R.layout.fragment_claim_viewer, container, false);
 
         list = (ListView) view.findViewById(R.id.ClaimsListView);
-        DatabaseHandler db = new DatabaseHandler(getContext());
+        final DatabaseHandler db = new DatabaseHandler(getContext());
         final ArrayList<Claims> claimsList = db.getAllClaims();
-        db.closeDB();
         final CustomAdapter adapter = new CustomAdapter(getContext(), claimsList);
         list.setAdapter(adapter);
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l)
+            {
+                db.deleteClaim(claimsList.get(position).getId());
+                Log.wtf("wtf", claimsList.get(position).getId() + "");
+                claimsList.remove(position);
+                adapter.notifyDataSetChanged();
+                return false;
+            }
+        });
+
+        db.closeDB();
 
 
 
@@ -155,26 +173,37 @@ public class ClaimViewer extends Fragment {
             }
 
             //Grab the gallery layout associated with this location
-            //galleryLayout =
-              //      (LinearLayout) convertView.findViewById(R.id.galleryLayout);
+            final LinearLayout galleryLayout = (LinearLayout) convertView.findViewById(R.id.galleryLayout);
             //Make the gallery layout invisible
-            //galleryLayout.setVisibility(View.GONE);
+            galleryLayout.setVisibility(View.GONE);
             //only add items to the gallery if the gallery is empty
-//            if(galleryLayout.getChildCount() == 0){
-//                //Grab all the photos that match the id of the current location
-//                DatabaseHandler db = new DatabaseHandler(getContext());
-//                //ArrayList<Picture> pics = db.getAllPictures(item.getId());
-//                db.closeDB();
-//                //Add those photos to the gallery
+            if(galleryLayout.getChildCount() == 0){
+                //Grab all the photos that match the id of the current location
+                //DatabaseHandler db = new DatabaseHandler(getContext());
+                //ArrayList<Picture> pics = db.getAllPictures(item.getId());
+                //db.closeDB();
+                //Add those photos to the gallery
 //                for(int i =0; i < pics.size(); i++){
-//                    Bitmap image = BitmapFactory.decodeFile(pics.get(i).getResource());
-//                    ImageView imageView = new ImageView(getContext());
-//                    imageView.setImageBitmap(image);
-//                    imageView.setAdjustViewBounds(true);
-//                    galleryLayout.addView(imageView);
-//                }
-//            }
+                    Bitmap image = BitmapFactory.decodeFile(item.getRes());
+                    ImageView imageView = new ImageView(getContext());
+                    imageView.setImageBitmap(image);
+                    imageView.setAdjustViewBounds(true);
+                    galleryLayout.addView(imageView);
+                //}
+            }
 
+            TextView showMoreLess = (TextView) convertView.findViewById(R.id.Details);
+            showMoreLess.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    if(galleryLayout.getVisibility() == View.GONE)
+                        galleryLayout.setVisibility(View.VISIBLE);
+                    else
+                        galleryLayout.setVisibility(View.GONE);
+                }
+            });
             TextView description =
                     (TextView) convertView.findViewById(R.id.DescriptionLabel);
             description.setText(
