@@ -40,4 +40,7 @@
     </array>
     <string name="ClaimName">Claim Name Here</string>
     <string name="Title">Title</string>
+    <string name="Address">Address</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="UserName">User Name</string>
 </resources>

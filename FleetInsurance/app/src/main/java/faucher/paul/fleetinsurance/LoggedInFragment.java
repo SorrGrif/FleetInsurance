@@ -1,13 +1,20 @@
 package faucher.paul.fleetinsurance;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -29,6 +36,7 @@ public class LoggedInFragment extends Fragment {
     private String mParam2;
     private LinearLayout claimLayout;
     private LinearLayout planLayout;
+    private TextView title;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,10 +77,45 @@ public class LoggedInFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_logged_in, container, false);
 
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        final FragmentTransaction ft = fm.beginTransaction();
+        final SharedPreferences.Editor prefEdit = getActivity().getPreferences(Context.MODE_APPEND).edit();
+        final SharedPreferences pref = getActivity().getPreferences(Context.MODE_APPEND);
+        String userName = pref.getString("user", "nouser");
         planLayout = (LinearLayout) view.findViewById(R.id.MyPlanLayout);
         claimLayout = (LinearLayout) view.findViewById(R.id.MyClaimsLayout);
+        title = (TextView) view.findViewById(R.id.TitleLabel);
+        DatabaseHandler db = new DatabaseHandler(getContext());
+        ArrayList<Users> userList = db.getAllUsers();
+        Users user = null;
+        for(int i = 0; i < userList.size(); i++)
+        {
+            if(userList.get(i).getId() == pref.getInt("userid", -1))
+            {
+                user = userList.get(i);
+            }
+        }
+        title.setText("Welcome, " + userName);
+        title.setText("Welcome, " + user.getName());
 
 
+
+
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                prefEdit.putString("user", "nouser");
+                prefEdit.putInt("userid", -1);
+                prefEdit.putBoolean("loggedin", false);
+                prefEdit.commit();
+                ft.replace(R.id.content_main, new ProfileFragment());
+                ft.commit();
+            }
+        });
 
         return view;
     }

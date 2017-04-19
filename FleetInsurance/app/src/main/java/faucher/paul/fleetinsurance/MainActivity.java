@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity
         ClaimCreator.OnFragmentInteractionListener,
         ProfileFragment.OnFragmentInteractionListener,
         LoggedInFragment.OnFragmentInteractionListener,
-        LoggedOutFragment.OnFragmentInteractionListener{
+        LoggedOutFragment.OnFragmentInteractionListener,
         ClaimViewer.OnFragmentInteractionListener,
         PlanChanger.OnFragmentInteractionListener,
         Contact.OnFragmentInteractionListener{
@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_myPlan)
         {
-            //ft.replace(R.id.content_main, new ProfileFragment());
-            //ft.commit();
+            ft.replace(R.id.content_main, new ProfileFragment());
+            ft.commit();
         }
         else if (id == R.id.nav_createClaim)
         {

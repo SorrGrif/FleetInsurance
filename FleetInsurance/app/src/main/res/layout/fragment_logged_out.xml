@@ -46,10 +46,10 @@
             android:id="@+id/EmailLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/EmailText"
+            android:text="@string/UserName"
             android:textColor="@color/titleFontColor"
             android:textSize="@dimen/TitleTextSize"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/EmailValue"
@@ -200,22 +200,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/GenderLabel"
+                android:id="@+id/AddressLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/Gender"
+                android:text="@string/Address"
                 android:textColor="@color/titleFontColor"
                 android:textSize="@dimen/TitleTextSize"
-                android:textStyle="normal|bold" />
+                android:textStyle="normal|bold"/>
 
-            <Spinner
-                android:id="@+id/GenderValue"
+            <EditText
+                android:id="@+id/AddressValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/Genders"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
                 android:textColor="@color/fontColor"
-                android:textSize="@dimen/TextSize" />
+                android:textSize="@dimen/TextSize"/>
 
         </LinearLayout>
 
@@ -226,23 +227,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/AgeLabel"
+                android:id="@+id/PhoneNumLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/Age"
+                android:text="@string/PhoneNumber"
                 android:textColor="@color/titleFontColor"
                 android:textSize="@dimen/TitleTextSize"
-                android:textStyle="normal|bold" />
+                android:textStyle="normal|bold"/>
 
             <EditText
-                android:id="@+id/AgeValue"
+                android:id="@+id/PhoneNumValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="number"
                 android:textColor="@color/fontColor"
-                android:textSize="@dimen/TextSize" />
+                android:textSize="@dimen/TextSize"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -1,6 +1,7 @@
 package faucher.paul.fleetinsurance;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import java.util.ArrayList;
 
 
 /**
@@ -39,6 +43,10 @@ public class LoggedOutFragment extends Fragment {
     private EditText email;
     private EditText password;
     private EditText retypePassword;
+    private EditText firstName;
+    private EditText lastName;
+    private EditText addressValue;
+    private EditText phoneNumValue;
     private FloatingActionButton fab;
     private LinearLayout passwordLayout;
     private LinearLayout retypePasswordLayout;
@@ -49,6 +57,9 @@ public class LoggedOutFragment extends Fragment {
     private boolean passwordsMatch = false;
     private FragmentManager fm;
     private FragmentTransaction ft;
+    private String name;
+    private String address;
+    private String phoneNum;
 
     private OnFragmentInteractionListener mListener;
 
@@ -93,13 +104,18 @@ public class LoggedOutFragment extends Fragment {
         email = (EditText) view.findViewById(R.id.EmailValue);
         password = (EditText) view.findViewById(R.id.PasswordValue);
         retypePassword = (EditText) view.findViewById(R.id.RetypePasswordValue);
+        firstName = (EditText) view.findViewById(R.id.FirstNameValue);
+        lastName = (EditText) view.findViewById(R.id.LastNameValue);
+        addressValue = (EditText) view.findViewById(R.id.AddressValue);
+        phoneNumValue = (EditText) view.findViewById(R.id.PhoneNumValue);
         passwordLayout = (LinearLayout) view.findViewById(R.id.PasswordLayout);
         retypePasswordLayout = (LinearLayout) view.findViewById(R.id.RetypePasswordLayout);
         nameLayout = (LinearLayout) view.findViewById(R.id.FirstNameLastNameLayout);
         genderAgeLayout = (LinearLayout) view.findViewById(R.id.GenderAgeLayout);
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        fm = getChildFragmentManager();
+        fm = getActivity().getSupportFragmentManager();
         ft = fm.beginTransaction();
+        final SharedPreferences.Editor prefEdit = getActivity().getPreferences(Context.MODE_APPEND).edit();
 
         //animations used to have the password and retype password fields fly onscreen smoothly
         final Animation passwordSlideInFromRight = AnimationUtils.loadAnimation(getContext(), R.anim.slideinfromright);
@@ -187,12 +203,27 @@ public class LoggedOutFragment extends Fragment {
             @Override
             public void onClick(View view)
             {
-                    if (passwordLayout.getVisibility() != View.VISIBLE && emailIsValid)
+                DatabaseHandler db = new DatabaseHandler(getContext());
+                ArrayList<Users> userList = db.getAllUsers();
+
+                if (passwordLayout.getVisibility() != View.VISIBLE && emailIsValid)
                     {
+
                         passwordLayout.setVisibility(View.VISIBLE);
                         passwordLayout.setAnimation(passwordSlideInFromRight);
                         passwordLayout.animate();
                         passwordSlideInFromRight.start();
+
+
+                        for(int i = 0; i < userList.size(); i++)
+                        {
+                            Log.wtf("user", userList.get(i).getName());
+                            if(userList.get(i).getName().equals(email.getText().toString()))
+                            {
+                                prefEdit.putInt("userid", i + 1);
+                                newAccount = false;
+                            }
+                        }
 
                         if (newAccount)
                         {
@@ -219,12 +250,25 @@ public class LoggedOutFragment extends Fragment {
                     //if the user is making a new account
                     if(newAccount && fieldsFull())
                     {
-                        ft.replace(R.id.content_main, new LoggedInFragment());
+                        name = firstName.getText().toString() + " " + lastName.getText().toString();
+                        address = addressValue.getText().toString();
+                        phoneNum = phoneNumValue.getText().toString();
+                        db.addUser(new Users(name, address, phoneNum, ""));
+                        prefEdit.putString("user", email.getText().toString());
+                        prefEdit.putBoolean("loggedin", true);
+                        prefEdit.putInt("userid", userList.size() + 1);
+                        prefEdit.commit();
+                        ft.replace(R.id.content_main, new ProfileFragment());
                         ft.commit();
                     }
-                    else
+                    else if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty())
                     {
+                        prefEdit.putString("user", email.getText().toString());
+                        prefEdit.putBoolean("loggedin", true);
 
+                        prefEdit.commit();
+                        ft.replace(R.id.content_main, new ProfileFragment());
+                        ft.commit();
                     }
             }
         });
@@ -246,7 +290,7 @@ public class LoggedOutFragment extends Fragment {
         //check if the email stirng contains @ and .
         //if it does set email is valid to true and textcolor to green
         //otherwise set it to red and set emailisvalid to false
-        if(email.contains("@") && email.contains("."))
+        if(!email.isEmpty())
         {
             //I used RGB instead of Color.GREEN because the default green
             //literally hurt my eyes when i first saw it
@@ -283,7 +327,19 @@ public class LoggedOutFragment extends Fragment {
 
     private boolean fieldsFull()
     {
-        return false;
+        String user = email.getText().toString();
+        String password1 = password.getText().toString();
+        String password2 = retypePassword.getText().toString();
+        String fName = firstName.getText().toString();
+        String lName = lastName.getText().toString();
+        String address = addressValue.getText().toString();
+        String phoneNum = phoneNumValue.getText().toString();
+
+        if(!user.isEmpty() && !password1.isEmpty() && !password2.isEmpty() && !fName.isEmpty() && !lName.isEmpty() && !address.isEmpty() && !phoneNum.isEmpty())
+            return true;
+        else
+            return false;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
