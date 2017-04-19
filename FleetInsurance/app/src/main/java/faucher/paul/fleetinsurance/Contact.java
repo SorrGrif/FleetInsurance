@@ -1,12 +1,16 @@
 package faucher.paul.fleetinsurance;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ShareCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -26,6 +30,9 @@ public class Contact extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button email;
+    private Button website;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +71,50 @@ public class Contact extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact, container, false);
+        View view = inflater.inflate(R.layout.fragment_contact, container, false);
+
+        website = (Button) view.findViewById(R.id.WebsiteButton);
+        email = (Button) view.findViewById(R.id.EmailButton);
+
+        website.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Uri website = Uri.parse("https://www.fleetinsurance.com");
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(website);
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), "No installed software to complete the task", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }            }
+        });
+
+        email.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //send the email
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"FleetInsurance@CarInsurance.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "I have a question about my car insurance...");
+                intent.putExtra(Intent.EXTRA_TEXT, "My Question is...");
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+                else{
+                    Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content),
+                            "No installed software to complete the task", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

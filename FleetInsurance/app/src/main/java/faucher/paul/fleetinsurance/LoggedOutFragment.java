@@ -250,7 +250,7 @@ public class LoggedOutFragment extends Fragment {
                     //if the user is making a new account
                     if(newAccount && fieldsFull())
                     {
-                        name = firstName.getText().toString() + " " + lastName.getText().toString();
+                        name = email.getText().toString();
                         address = addressValue.getText().toString();
                         phoneNum = phoneNumValue.getText().toString();
                         db.addUser(new Users(name, address, phoneNum, ""));

@@ -78,6 +78,7 @@ public class LoggedInFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_logged_in, container, false);
 
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_exit_to_app_white_24dp);
 
         FragmentManager fm = getActivity().getSupportFragmentManager();
         final FragmentTransaction ft = fm.beginTransaction();
@@ -113,6 +114,26 @@ public class LoggedInFragment extends Fragment {
                 prefEdit.putBoolean("loggedin", false);
                 prefEdit.commit();
                 ft.replace(R.id.content_main, new ProfileFragment());
+                ft.commit();
+            }
+        });
+
+        planLayout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                ft.replace(R.id.content_main, new PlanChanger());
+                ft.commit();
+            }
+        });
+
+        claimLayout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                ft.replace(R.id.content_main, new ClaimViewer());
                 ft.commit();
             }
         });
