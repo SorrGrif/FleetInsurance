@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="faucher.paul.fleetinsurance.LoggedInFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/TitleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:text="@string/WelcomePlaceholder"
+        android:textColor="@color/titleFontColor"
+        android:textSize="@dimen/TitleTextSize"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/AccountImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/TopMargin"
+        app:srcCompat="@drawable/accountsillhoutte" />
+
+    <LinearLayout
+        android:id="@+id/MyPlanLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/LeftPadding"
+        android:paddingRight="@dimen/RightPadding">
+
+        <TextView
+            android:id="@+id/MyPlanLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MyPlan"
+            android:textColor="@color/titleFontColor"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/MyPlanDescriptionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/MyPlanDescription"
+            android:textColor="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/MyClaimsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/LeftPadding"
+        android:paddingRight="@dimen/RightPadding">
+
+        <TextView
+            android:id="@+id/MyClaimsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/MyClaims"
+            android:textColor="@color/titleFontColor"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/MyClaimsDescriptionLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/MyClaimsDescription"
+            android:textColor="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+
+</LinearLayout>

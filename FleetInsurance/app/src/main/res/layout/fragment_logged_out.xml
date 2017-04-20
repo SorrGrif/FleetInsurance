@@ -1,0 +1,251 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="faucher.paul.fleetinsurance.LoggedOutFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="faucher.paul.fleetinsurance.LoggedOutFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/SignInLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:text="@string/SignIn"
+        android:textColor="@color/titleFontColor"
+        android:textSize="@dimen/TitleTextSize"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/AccountImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/TopMargin"
+        app:srcCompat="@drawable/accountsillhoutte" />
+
+    <LinearLayout
+        android:id="@+id/EmailLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/EmailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/UserName"
+            android:textColor="@color/titleFontColor"
+            android:textSize="@dimen/TitleTextSize"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/EmailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/TextSize" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/PasswordLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/PasswordLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/TopMargin"
+            android:text="@string/Password"
+            android:textColor="@color/titleFontColor"
+            android:textSize="@dimen/TitleTextSize"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/PasswordValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/TextSize" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/RetypePasswordLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/RetypePasswordLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/TopMargin"
+            android:text="@string/RetypePassword"
+            android:textColor="@color/titleFontColor"
+            android:textSize="@dimen/TitleTextSize"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/RetypePasswordValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textColor="@color/fontColor"
+            android:textSize="@dimen/TextSize" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/FirstNameLastNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/LeftPadding"
+        android:paddingRight="@dimen/RightPadding"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/FirstNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/FirstName"
+                android:textColor="@color/titleFontColor"
+                android:textSize="@dimen/TitleTextSize"
+                android:textStyle="normal|bold" />
+
+            <EditText
+                android:id="@+id/FirstNameValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/TextSize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/LastNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/LastName"
+                android:textColor="@color/titleFontColor"
+                android:textSize="@dimen/TitleTextSize"
+                android:textStyle="normal|bold" />
+
+            <EditText
+                android:id="@+id/LastNameValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/TextSize" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/GenderAgeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/TopMargin"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/LeftPadding"
+        android:paddingRight="@dimen/RightPadding"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/AddressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Address"
+                android:textColor="@color/titleFontColor"
+                android:textSize="@dimen/TitleTextSize"
+                android:textStyle="normal|bold"/>
+
+            <EditText
+                android:id="@+id/AddressValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/TextSize"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/PhoneNumLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/PhoneNumber"
+                android:textColor="@color/titleFontColor"
+                android:textSize="@dimen/TitleTextSize"
+                android:textStyle="normal|bold"/>
+
+            <EditText
+                android:id="@+id/PhoneNumValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:textColor="@color/fontColor"
+                android:textSize="@dimen/TextSize"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>

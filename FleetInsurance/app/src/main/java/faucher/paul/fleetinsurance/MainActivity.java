@@ -1,8 +1,11 @@
 package faucher.paul.fleetinsurance;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,8 +17,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        ClaimCreator.OnFragmentInteractionListener,
+        ProfileFragment.OnFragmentInteractionListener,
+        LoggedInFragment.OnFragmentInteractionListener,
+        LoggedOutFragment.OnFragmentInteractionListener,
+        ClaimViewer.OnFragmentInteractionListener,
+        PlanChanger.OnFragmentInteractionListener,
+        Contact.OnFragmentInteractionListener,
+        PlanInformation.OnFragmentInteractionListener,
+        PlanFragment.OnFragmentInteractionListener{
 
+
+
+    FragmentManager fm;
+    FragmentTransaction ft;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,14 +39,18 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Plan Selected", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+        fab.setImageResource(R.drawable.ic_add_black_24dp);
+        //fab = null;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -38,8 +58,15 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.content_main, new ProfileFragment());
+        ft.commit();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
@@ -80,22 +107,51 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        if (id == R.id.nav_myPlan)
+        {
+            ft.replace(R.id.content_main, new ProfileFragment());
+            ft.setCustomAnimations(R.anim.slideinfromright, R.anim.slideoutfromleft);
+            ft.commit();
+        }
+        else if (id == R.id.nav_createClaim)
+        {
+            ft.replace(R.id.content_main, new ClaimCreator());
+            ft.setCustomAnimations(R.anim.slideinfromright, R.anim.slideoutfromleft);
+            ft.commit();
+        }
+        else if (id == R.id.nav_currentClaim)
+        {
+            ft.replace(R.id.content_main, new ClaimViewer());
+            ft.setCustomAnimations(R.anim.slideinfromright, R.anim.slideoutfromleft);
+            ft.commit();
 
-        } else if (id == R.id.nav_share) {
+        }
+        else if (id == R.id.nav_planChange)
+        {
+            ft.replace(R.id.content_main, new PlanInformation());
+            ft.setCustomAnimations(R.anim.slideinfromright, R.anim.slideoutfromleft);
+            ft.commit();
 
-        } else if (id == R.id.nav_send) {
+        }
+        else if (id == R.id.nav_contact)
+        {
+            ft.replace(R.id.content_main, new Contact());
+            ft.setCustomAnimations(R.anim.slideinfromright, R.anim.slideoutfromleft);
+            ft.commit();
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

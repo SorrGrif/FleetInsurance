@@ -1,12 +1,31 @@
 package faucher.paul.fleetinsurance;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -26,6 +45,7 @@ public class ClaimViewer extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ListView list;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +84,47 @@ public class ClaimViewer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_claim_viewer, container, false);
+        View view = inflater.inflate(R.layout.fragment_claim_viewer, container, false);
+
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.ic_add_black_24dp);
+
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.content_main, new ClaimCreator());
+                ft.commit();
+            }
+        });
+
+        list = (ListView) view.findViewById(R.id.ClaimsListView);
+        final DatabaseHandler db = new DatabaseHandler(getContext());
+        final ArrayList<Claims> claimsList = db.getAllClaims();
+        final CustomAdapter adapter = new CustomAdapter(getContext(), claimsList);
+        list.setAdapter(adapter);
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l)
+            {
+                db.deleteClaim(claimsList.get(position).getId());
+                Log.wtf("wtf", claimsList.get(position).getId() + "");
+                claimsList.remove(position);
+                adapter.notifyDataSetChanged();
+                return false;
+            }
+        });
+
+        db.closeDB();
+
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -104,5 +164,77 @@ public class ClaimViewer extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public class CustomAdapter extends ArrayAdapter<Claims>
+    {
+
+        public CustomAdapter(Context context, ArrayList<Claims> items) {
+            super(context, 0, items);
+        }
+
+        /**
+         * getView is used to take every item in a list
+         * and assign a view to it.
+         * With this specific adapter we specified item_view as the view
+         * we want every item in a list to look like.
+         * After that item has item_view attached to it
+         * we populate the item_view's name TextView
+         */
+        public View getView(int position, View convertView, ViewGroup parent){
+            final Claims item = getItem(position);
+
+            if(convertView == null){
+                convertView =
+                        LayoutInflater.from(getContext()).inflate(
+                                R.layout.claim_view, parent, false);
+            }
+
+            //Grab the gallery layout associated with this location
+            final LinearLayout galleryLayout = (LinearLayout) convertView.findViewById(R.id.galleryLayout);
+            //Make the gallery layout invisible
+            galleryLayout.setVisibility(View.GONE);
+            //only add items to the gallery if the gallery is empty
+            if(galleryLayout.getChildCount() == 0){
+                //Grab all the photos that match the id of the current location
+                //DatabaseHandler db = new DatabaseHandler(getContext());
+                //ArrayList<Picture> pics = db.getAllPictures(item.getId());
+                //db.closeDB();
+                //Add those photos to the gallery
+//                for(int i =0; i < pics.size(); i++){
+                    Bitmap image = BitmapFactory.decodeFile(item.getRes());
+                    ImageView imageView = new ImageView(getContext());
+                    imageView.setImageBitmap(image);
+                    imageView.setAdjustViewBounds(true);
+                    galleryLayout.addView(imageView);
+                //}
+            }
+
+            TextView showMoreLess = (TextView) convertView.findViewById(R.id.Details);
+            showMoreLess.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    if(galleryLayout.getVisibility() == View.GONE)
+                        galleryLayout.setVisibility(View.VISIBLE);
+                    else
+                        galleryLayout.setVisibility(View.GONE);
+                }
+            });
+            TextView description =
+                    (TextView) convertView.findViewById(R.id.DescriptionLabel);
+            description.setText(
+                    ((Claims) list.getItemAtPosition(position)).getDesc()
+            );
+
+            TextView name = (TextView) convertView.findViewById(R.id.ClaimNameLabel);
+            name.setText(item.getClaimName());
+
+            return  convertView;
+        }
+
+
+
     }
 }
