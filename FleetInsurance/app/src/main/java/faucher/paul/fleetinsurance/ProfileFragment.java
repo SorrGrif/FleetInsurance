@@ -1,27 +1,27 @@
 package faucher.paul.fleetinsurance;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ShareCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.FrameLayout;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Contact.OnFragmentInteractionListener} interface
+ * {@link ProfileFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Contact#newInstance} factory method to
+ * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Contact extends Fragment {
+public class ProfileFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,13 +30,10 @@ public class Contact extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button email;
-    private Button website;
-
 
     private OnFragmentInteractionListener mListener;
 
-    public Contact() {
+    public ProfileFragment() {
         // Required empty public constructor
     }
 
@@ -46,11 +43,11 @@ public class Contact extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Contact.
+     * @return A new instance of fragment ProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Contact newInstance(String param1, String param2) {
-        Contact fragment = new Contact();
+    public static ProfileFragment newInstance(String param1, String param2) {
+        ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,48 +68,28 @@ public class Contact extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_contact, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        website = (Button) view.findViewById(R.id.WebsiteButton);
-        email = (Button) view.findViewById(R.id.EmailButton);
+        final SharedPreferences.Editor prefEdit = getActivity().getPreferences(Context.MODE_APPEND).edit();
+        final SharedPreferences pref = getActivity().getPreferences(Context.MODE_APPEND);
+        boolean loggedIn = pref.getBoolean("loggedin", false);
 
-        website.setOnClickListener(new View.OnClickListener()
+        if(!loggedIn)
         {
-            @Override
-            public void onClick(View view)
-            {
-                Uri website = Uri.parse("https://www.fleetinsurance.com");
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(website);
-                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), "No installed software to complete the task", Snackbar.LENGTH_SHORT);
-                    snackbar.show();
-                }            }
-        });
 
-        email.setOnClickListener(new View.OnClickListener()
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.ProfileFrame, new LoggedOutFragment());
+            ft.addToBackStack(null);
+            ft.commit();
+        }
+        else
         {
-            @Override
-            public void onClick(View view)
-            {
-                //send the email
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:"));
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"FleetInsurance@CarInsurance.com"});
-                intent.putExtra(Intent.EXTRA_SUBJECT, "I have a question about my car insurance...");
-                intent.putExtra(Intent.EXTRA_TEXT, "My Question is...");
-                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(intent);
-                }
-                else{
-                    Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content),
-                            "No installed software to complete the task", Snackbar.LENGTH_SHORT);
-                    snackbar.show();
-                }
-            }
-        });
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.ProfileFrame, new LoggedInFragment());
+            ft.commit();
+        }
 
         return view;
     }

@@ -11,4 +11,36 @@
     <string name="current_claim">My Current Claims</string>
     <string name="contact">Contact Us</string>
     <string name="change_plan">Change Current Plan</string>
+    <string name="claimHeader">Accidents can be un-bear-able. Get it fixed up by simply submitting a picture!</string>
+    <string name="Date">Date</string>
+    <string name="Time">Time</string>
+    <string name="SelectDateHint">Tap to Select Date</string>
+    <string name="SelectTimeHint">Tap to Select Time</string>
+    <string name="FirstName">First</string>
+    <string name="LastName">Last</string>
+    <string name="PlaceHolder">\???</string>
+    <string name="Description">Description</string>
+    <string name="CharacterCount">255/255</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="EmailText">Email</string>
+    <string name="Password">Password</string>
+    <string name="RetypePassword">Retype Password</string>
+    <string name="SignIn">Sign in</string>
+    <string name="Gender">Gender</string>
+    <string name="Age">Age</string>
+    <string name="WelcomePlaceholder">Welcome, ???</string>
+    <string name="MyPlan">My Plan</string>
+    <string name="MyPlanDescription">View your current plan</string>
+    <string name="MyClaims">My Claims</string>
+    <string name="MyClaimsDescription">View my claims</string>
+    <array name="Genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </array>
+    <string name="ClaimName">Claim Name Here</string>
+    <string name="Title">Title</string>
+    <string name="Address">Address</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="UserName">User Name</string>
 </resources>

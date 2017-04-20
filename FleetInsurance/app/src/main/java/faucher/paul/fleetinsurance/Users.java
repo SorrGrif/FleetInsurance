@@ -23,6 +23,33 @@ public class Users {
 
     }
 
+    public Users(String name, String address, String phoneNum,
+                 String claimStatus, String planStatus, String res) {
+
+        this.name = name;
+        this.address = address;
+        this.phoneNum = phoneNum;
+        this.claimStatus = claimStatus;
+        this.planStatus = planStatus;
+        this.res = res;
+
+    }
+
+    public Users(String name, String address, String phoneNum,
+                 String res) {
+
+        this.name = name;
+        this.address = address;
+        this.phoneNum = phoneNum;
+        this.res = res;
+
+    }
+
+    public Users()
+    {
+
+    }
+
     public String getRes() {
         return res;
     }

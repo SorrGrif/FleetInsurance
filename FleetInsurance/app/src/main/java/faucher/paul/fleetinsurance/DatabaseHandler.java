@@ -1,15 +1,20 @@
 package faucher.paul.fleetinsurance;
 
+import android.app.IntentService;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.location.Location;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     //Database Name
     private static final String DATABASE_NAME = "fleetInsurance";
@@ -73,6 +78,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         //Adding values to each column
+        values.put(KEY_ID, getAllUsers().size() + 1);
         values.put(KEY_NAME, user.getName());
         values.put(KEY_ADDRESS, user.getAddress());
         values.put(KEY_PHONE_NUM, user.getPhoneNum());
@@ -90,7 +96,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
+        ArrayList<Claims> claimList = getAllClaims();
         //Adding values to each column
+        values.put(KEY_ID, claimList.size() + 1);
         values.put(KEY_CLAIM_NAME, claim.getClaimName());
         values.put(KEY_DATE, claim.getDate());
         values.put(KEY_DESC, claim.getDesc());
@@ -98,6 +106,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         //Inserting records into database
         db.insert(TABLE_CLAIMS, null, values);
+        db.close();
     }
 
     /**
@@ -113,7 +122,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_USER,
                 new String[] {KEY_ID, KEY_NAME, KEY_ADDRESS, KEY_PHONE_NUM,
                         KEY_CLAIM_STATUS, KEY_PLAN_STATUS, KEY_PROFILE_PIC},
-                "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+                "= ?", new String[]{String.valueOf(id)}, null, null, null, null);
 
         if(cursor != null)
             cursor.moveToFirst();
@@ -144,6 +153,49 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return claim;
     }
+
+    public ArrayList<Claims> getAllClaims() {
+        ArrayList<Claims> claimsList = new ArrayList<Claims>();
+        String selectQuery = "SELECT  * FROM " + TABLE_CLAIMS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Claims claim = new Claims();
+                    claim.setId(Integer.parseInt(cursor.getString(0)));
+                claim.setClaimName(cursor.getString(1));
+                claim.setDate(cursor.getString(2));
+                claim.setDesc(cursor.getString(3));
+                claim.setRes(cursor.getString(4));
+                claimsList.add(claim);
+            } while (cursor.moveToNext());
+        }
+        return claimsList;
+    }
+
+    public ArrayList<Users> getAllUsers() {
+        ArrayList<Users> usersList = new ArrayList<Users>();
+        String selectQuery = "SELECT  * FROM " + TABLE_USER;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Users users = new Users();
+                users.setId(Integer.parseInt(cursor.getString(0)));
+                users.setName(cursor.getString(1));
+                users.setAddress(cursor.getString(2));
+                users.setClaimStatus(cursor.getString(3));
+                users.setPlanStatus(cursor.getString(3));
+                users.setRes(cursor.getString(4));
+                usersList.add(users);
+            } while (cursor.moveToNext());
+        }
+        return usersList;
+    }
+
+
 
 
     /**

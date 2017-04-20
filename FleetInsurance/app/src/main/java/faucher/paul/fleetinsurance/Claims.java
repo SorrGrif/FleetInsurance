@@ -9,6 +9,14 @@ public class Claims {
     private String res;
 
 
+    Claims(String claimName, String date, String desc, String res){
+
+        this.claimName = claimName;
+        this.date = date;
+        this.desc = desc;
+        this.res = res;
+
+    }
 
     Claims(int id, String claimName, String date, String desc, String res){
 
@@ -17,6 +25,11 @@ public class Claims {
         this.date = date;
         this.desc = desc;
         this.res = res;
+
+    }
+
+    Claims()
+    {
 
     }
 

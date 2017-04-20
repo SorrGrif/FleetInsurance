@@ -1,8 +1,11 @@
 package faucher.paul.fleetinsurance;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,8 +17,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        ClaimCreator.OnFragmentInteractionListener,
+        ProfileFragment.OnFragmentInteractionListener,
+        LoggedInFragment.OnFragmentInteractionListener,
+        LoggedOutFragment.OnFragmentInteractionListener,
+        ClaimViewer.OnFragmentInteractionListener,
+        PlanChanger.OnFragmentInteractionListener,
+        Contact.OnFragmentInteractionListener{
 
+
+
+    FragmentManager fm;
+    FragmentTransaction ft;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +45,8 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        fab.setImageResource(R.drawable.ic_add_black_24dp);
+        //fab = null;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -38,8 +54,15 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.content_main, new ClaimViewer());
+        ft.commit();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
@@ -80,23 +103,45 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-       /*
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        if (id == R.id.nav_myPlan)
+        {
+            ft.replace(R.id.content_main, new ProfileFragment());
+            ft.commit();
+        }
+        else if (id == R.id.nav_createClaim)
+        {
+            ft.replace(R.id.content_main, new ClaimCreator());
+            ft.commit();
+        }
+        else if (id == R.id.nav_currentClaim)
+        {
+            ft.replace(R.id.content_main, new ClaimViewer());
+            ft.commit();
 
         }
-*/
+        else if (id == R.id.nav_planChange)
+        {
+            ft.replace(R.id.content_main, new PlanChanger());
+            ft.commit();
+
+        }
+        else if (id == R.id.nav_contact)
+        {
+            ft.replace(R.id.content_main, new Contact());
+            ft.commit();
+
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
