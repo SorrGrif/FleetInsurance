@@ -30,4 +30,5 @@
         android:id="@+id/planDesc"
         android:padding="@dimen/descTextSize"
         android:elevation="@dimen/textElevation" />
+
 </LinearLayout>

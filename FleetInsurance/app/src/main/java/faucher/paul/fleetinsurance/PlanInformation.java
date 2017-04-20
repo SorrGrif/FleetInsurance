@@ -11,6 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
+import static java.lang.Integer.parseInt;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +35,7 @@ public class PlanInformation extends Fragment {
     private String mParam2;
     private ViewPager planViewPager;
     private SectionPagerAdapter sectionPagerAdapter;
-
+    int planChoice = 0;
     private OnFragmentInteractionListener mListener;
 
     public PlanInformation() {
@@ -71,9 +75,14 @@ public class PlanInformation extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_plan_information, container, false);
 
+        //handling the viewpager
         sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager());
+
+        //setting the viewpager
         planViewPager = (ViewPager) view.findViewById(R.id.planPager);
         planViewPager.setAdapter(sectionPagerAdapter);
+
+        //setting the animation to the viewpager
         planViewPager.setPageTransformer(true, new DepthPageTransformer());
 
         return view;
@@ -85,23 +94,26 @@ public class PlanInformation extends Fragment {
         }
 
         public Fragment getItem(int position) {
+
             switch (position) {
                 case 0:
                     return PlanFragment.newInstance(getString(R.string.bearPlan),
                             getString(R.string.bearDesc),
-                            R.drawable.ic_assignment_black_24dp);
+                            R.drawable.ic_assignment_black_24dp, planChoice, 1);
                 case 1:
                     return PlanFragment.newInstance(getString(R.string.otterPlan),
-                            getString(R.string.otterDesc), R.drawable.ic_add_a_photo_black_24dp);
+                            getString(R.string.otterDesc), R.drawable.ic_add_a_photo_black_24dp, planChoice, 2);
                 case 2:
                     return PlanFragment.newInstance(getString(R.string.pandaPlan),
-                            getString(R.string.pandaDesc), R.drawable.ic_assignment_black_24dp);
+                            getString(R.string.pandaDesc), R.drawable.ic_assignment_black_24dp,
+                            planChoice, 3);
                 case 3:
                     return PlanFragment.newInstance(getString(R.string.catPlan),
-                            getString(R.string.catDesc), R.drawable.ic_assignment_black_24dp);
+                            getString(R.string.catDesc), R.drawable.ic_assignment_black_24dp,
+                            planChoice, 4);
                 default:
                     return PlanFragment.newInstance("Default Plan Title",
-                            "Default Plan Desc", R.drawable.ic_assignment_black_24dp);
+                            "Default Plan Desc", R.drawable.ic_assignment_black_24dp, planChoice, 0);
             }
         }
 
