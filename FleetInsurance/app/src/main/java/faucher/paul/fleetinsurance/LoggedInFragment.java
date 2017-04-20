@@ -123,7 +123,7 @@ public class LoggedInFragment extends Fragment {
             @Override
             public void onClick(View view)
             {
-                ft.replace(R.id.content_main, new PlanChanger());
+                ft.replace(R.id.content_main, new PlanInformation());
                 ft.commit();
             }
         });

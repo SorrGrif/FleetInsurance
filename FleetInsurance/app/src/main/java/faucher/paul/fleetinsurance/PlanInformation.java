@@ -3,6 +3,8 @@ package faucher.paul.fleetinsurance;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+
 
 import static java.lang.Integer.parseInt;
 
@@ -75,6 +78,17 @@ public class PlanInformation extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_plan_information, container, false);
 
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Plan Selected", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        fab.setImageResource(R.drawable.ic_add_black_24dp);
+
         //handling the viewpager
         sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager());
 
@@ -121,6 +135,7 @@ public class PlanInformation extends Fragment {
         }
     }
 
+    //using a depthPageTransformer for the viewpager items
     public class DepthPageTransformer implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.75f;
 
