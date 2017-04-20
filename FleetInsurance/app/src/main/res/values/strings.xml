@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FleetInsurance</string>
+    <string name="app_name">Fleet\nInsurance</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -43,4 +43,23 @@
     <string name="Address">Address</string>
     <string name="PhoneNumber">Phone Number</string>
     <string name="UserName">User Name</string>
+
+    <!-- Creating string values for the plan information. -->
+    <string name="bearPlan">The Bear Package</string>
+    <string name="otterPlan">Get otter \'ere!</string>
+    <string name="pandaPlan">Pandamonium</string>
+    <string name="catPlan">Nine Lives</string>
+
+    <string name="bearDesc">This plan covers the bear necessities! \n\nThis basic plan covers liability
+    in an auto accident. This means that the plan will protect you from the responsibility if you injure someone or something
+    during an auto accident.</string>
+
+    <string name="otterDesc">This plan is for people with a internationals driver\'s permit. \n\nUsing this plan when
+    eligible, you may ignore the \'first time driver\' penalty for traveling drivers when moving in and out the country.</string>
+
+    <string name="pandaDesc">This plan covers absolutetly anything, from earthquakes to the zombie apocolyspe! \n\nKeep your
+    vehicle and the belongings inside, safe, with this cover-all plan!</string>
+
+    <string name="catDesc">This plan will cover up to nine accidents on any current vehicle! \n\nIncludes accident forgiveness,
+    collision insurance, cat-burglary and more.</string>
 </resources>
