@@ -99,21 +99,19 @@ public class PlanInformation extends Fragment {
                 case 0:
                     return PlanFragment.newInstance(getString(R.string.bearPlan),
                             getString(R.string.bearDesc),
-                            R.drawable.ic_assignment_black_24dp, planChoice, 1);
+                            R.drawable.bear);
                 case 1:
                     return PlanFragment.newInstance(getString(R.string.otterPlan),
-                            getString(R.string.otterDesc), R.drawable.ic_add_a_photo_black_24dp, planChoice, 2);
+                            getString(R.string.otterDesc), R.drawable.otter);
                 case 2:
                     return PlanFragment.newInstance(getString(R.string.pandaPlan),
-                            getString(R.string.pandaDesc), R.drawable.ic_assignment_black_24dp,
-                            planChoice, 3);
+                            getString(R.string.pandaDesc), R.drawable.panda);
                 case 3:
                     return PlanFragment.newInstance(getString(R.string.catPlan),
-                            getString(R.string.catDesc), R.drawable.ic_assignment_black_24dp,
-                            planChoice, 4);
+                            getString(R.string.catDesc), R.drawable.cat);
                 default:
                     return PlanFragment.newInstance("Default Plan Title",
-                            "Default Plan Desc", R.drawable.ic_assignment_black_24dp, planChoice, 0);
+                            "Default Plan Desc", R.drawable.icon);
             }
         }
 

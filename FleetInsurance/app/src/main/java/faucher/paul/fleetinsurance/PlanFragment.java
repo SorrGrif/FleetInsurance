@@ -32,9 +32,6 @@ public class PlanFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private int mParam3;
-    private int mParam4;
-    private int mParam5;
-
     private OnFragmentInteractionListener mListener;
 
     public PlanFragment() {
@@ -50,14 +47,12 @@ public class PlanFragment extends Fragment {
      * @return A new instance of fragment PlanFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PlanFragment newInstance(String param1, String param2, int param3, int param4, int param5) {
+    public static PlanFragment newInstance(String param1, String param2, int param3) {
         PlanFragment fragment = new PlanFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         args.putInt(ARG_PARAM3, param3);
-        args.putInt(ARG_PARAM4, param4);
-        args.putInt(ARG_PARAM5, param5);
         fragment.setArguments(args);
         return fragment;
     }
@@ -69,8 +64,6 @@ public class PlanFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
             mParam3 = getArguments().getInt(ARG_PARAM3);
-            mParam4 = getArguments().getInt(ARG_PARAM4);
-            mParam5 = getArguments().getInt(ARG_PARAM5);
         }
     }
 
