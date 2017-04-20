@@ -114,28 +114,33 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_myPlan)
         {
             ft.replace(R.id.content_main, new ProfileFragment());
+            ft.setCustomAnimations(R.anim.slideinfromright, R.anim.slideoutfromleft);
             ft.commit();
         }
         else if (id == R.id.nav_createClaim)
         {
             ft.replace(R.id.content_main, new ClaimCreator());
+            ft.setCustomAnimations(R.anim.slideinfromright, R.anim.slideoutfromleft);
             ft.commit();
         }
         else if (id == R.id.nav_currentClaim)
         {
             ft.replace(R.id.content_main, new ClaimViewer());
+            ft.setCustomAnimations(R.anim.slideinfromright, R.anim.slideoutfromleft);
             ft.commit();
 
         }
         else if (id == R.id.nav_planChange)
         {
             ft.replace(R.id.content_main, new PlanInformation());
+            ft.setCustomAnimations(R.anim.slideinfromright, R.anim.slideoutfromleft);
             ft.commit();
 
         }
         else if (id == R.id.nav_contact)
         {
             ft.replace(R.id.content_main, new Contact());
+            ft.setCustomAnimations(R.anim.slideinfromright, R.anim.slideoutfromleft);
             ft.commit();
 
         }
