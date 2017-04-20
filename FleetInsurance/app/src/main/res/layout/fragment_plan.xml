@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/planPicture"
+        android:elevation="@dimen/textElevation" />
+
+    <TextView
+        android:text="Default Plan Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/planTitle"
+        android:elevation="@dimen/textElevation"
+        android:padding="10dp"
+        android:textStyle="normal|bold"
+        android:textSize="@dimen/titleTextSize"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:text="Default Plan Desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/planDesc"
+        android:padding="@dimen/descTextSize"
+        android:elevation="@dimen/textElevation" />
+</LinearLayout>

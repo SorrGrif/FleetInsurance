@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity
         LoggedOutFragment.OnFragmentInteractionListener,
         ClaimViewer.OnFragmentInteractionListener,
         PlanChanger.OnFragmentInteractionListener,
-        Contact.OnFragmentInteractionListener{
+        Contact.OnFragmentInteractionListener,
+        PlanInformation.OnFragmentInteractionListener,
+        PlanFragment.OnFragmentInteractionListener{
 
 
 
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_planChange)
         {
-            ft.replace(R.id.content_main, new PlanChanger());
+            ft.replace(R.id.content_main, new PlanInformation());
             ft.commit();
 
         }

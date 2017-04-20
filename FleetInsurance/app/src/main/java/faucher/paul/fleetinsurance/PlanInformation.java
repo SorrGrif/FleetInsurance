@@ -4,6 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,8 @@ public class PlanInformation extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ViewPager planViewPager;
+    private SectionPagerAdapter sectionPagerAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,8 +69,86 @@ public class PlanInformation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plan_information, container, false);
+        View view = inflater.inflate(R.layout.fragment_plan_information, container, false);
+
+        sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager());
+        planViewPager = (ViewPager) view.findViewById(R.id.planPager);
+        planViewPager.setAdapter(sectionPagerAdapter);
+        planViewPager.setPageTransformer(true, new DepthPageTransformer());
+
+        return view;
     }
+
+    public class SectionPagerAdapter extends FragmentPagerAdapter {
+        public SectionPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return PlanFragment.newInstance(getString(R.string.bearPlan),
+                            getString(R.string.bearDesc),
+                            R.drawable.ic_assignment_black_24dp);
+                case 1:
+                    return PlanFragment.newInstance(getString(R.string.otterPlan),
+                            getString(R.string.otterDesc), R.drawable.ic_add_a_photo_black_24dp);
+                case 2:
+                    return PlanFragment.newInstance(getString(R.string.pandaPlan),
+                            getString(R.string.pandaDesc), R.drawable.ic_assignment_black_24dp);
+                case 3:
+                    return PlanFragment.newInstance(getString(R.string.catPlan),
+                            getString(R.string.catDesc), R.drawable.ic_assignment_black_24dp);
+                default:
+                    return PlanFragment.newInstance("Default Plan Title",
+                            "Default Plan Desc", R.drawable.ic_assignment_black_24dp);
+            }
+        }
+
+        public int getCount(){
+
+            return 4;
+        }
+    }
+
+    public class DepthPageTransformer implements ViewPager.PageTransformer {
+        private static final float MIN_SCALE = 0.75f;
+
+        public void transformPage(View view, float position) {
+            int pageWidth = view.getWidth();
+
+            if (position < -1) { // [-Infinity,-1)
+                // This page is way off-screen to the left.
+                view.setAlpha(0);
+
+            } else if (position <= 0) { // [-1,0]
+                // Use the default slide transition when moving to the left page
+                view.setAlpha(1);
+                view.setTranslationX(0);
+                view.setScaleX(1);
+                view.setScaleY(1);
+
+            } else if (position <= 1) { // (0,1]
+                // Fade the page out.
+                view.setAlpha(1 - position);
+
+                // Counteract the default slide transition
+                view.setTranslationX(pageWidth * -position);
+
+                // Scale the page down (between MIN_SCALE and 1)
+                float scaleFactor = MIN_SCALE
+                        + (1 - MIN_SCALE) * (1 - Math.abs(position));
+                view.setScaleX(scaleFactor);
+                view.setScaleY(scaleFactor);
+
+            } else { // (1,+Infinity]
+                // This page is way off-screen to the right.
+                view.setAlpha(0);
+            }
+        }
+    }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
